@@ -10,6 +10,8 @@ let verificaToken = (req, res, next) => {
 
     jwt.verify(token, process.env.SEED, (err, decoded) => {
 
+        console.log("Decodeeeeee", decoded.usuarioDB);
+
         if (err) {
             return res.status(401).json({
                 ok: false,
@@ -19,7 +21,8 @@ let verificaToken = (req, res, next) => {
             });
         }
 
-        req.usuario = decoded.usuario;
+        req.usuario = decoded.usuarioDB;
+        
         next();
 
     });
@@ -34,6 +37,8 @@ let verificaToken = (req, res, next) => {
 let verificaAdmin_Role = (req, res, next) => {
 
     let usuario = req.usuario;
+
+   
 
     if (usuario.role === 'ADMIN_ROLE') {
         next();
