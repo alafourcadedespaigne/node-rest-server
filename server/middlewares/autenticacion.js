@@ -10,8 +10,6 @@ let verificaToken = (req, res, next) => {
 
     jwt.verify(token, process.env.SEED, (err, decoded) => {
 
-        console.log("Decodeeeeee", decoded.usuarioDB);
-
         if (err) {
             return res.status(401).json({
                 ok: false,
